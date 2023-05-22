@@ -1,0 +1,160 @@
+* {
+  margin: 0; /*ESPAÇAMENTO EXTERNO*/
+  padding: 0; /*ESPAÇAMENTO INTERNO*/
+  box-sizing: border-box; /*FAZ COM QUE O NAVEGADOR RESPEITE O TAMANHO DOS ELEMENTOS*/
+}
+
+:root { /*A RAIZ DO SITE, ELEMENTO PRINCIPAL*/
+  font-size: 16px; /*DEFININDO QUE A FONTE PADRÃO DO NOSSO SITE É DE 16PX*/
+}
+
+::-webkit-scrollbar {
+  width: 8px; /*DEFINE A LARGURA DA BARRA DE ROLAGEM*/
+}
+
+::-webkit-scrollbar-track { /*O CAMINHO POR ONDE A BARRA PERCORRE*/
+  background-color: #2c2c31; /*COR DO CAMINHO*/
+}
+
+::-webkit-scrollbar-thumb { /*BARRA DO NAVEGADOR*/
+  background-color: #9e9ea0; /*COR DA BARRA*/
+}
+
+@keyframes entering { /*ANIMAÇÃO KEYFRAME E O NOME DELA = ENTERING*/
+  from {
+    opacity: 0; /*DEFINE A OPACIDADE DA ANIMAÇÃO*/
+    transform: translateY(-200px); /*MANIPULA A POSIÇÃO NA VERTICAL*/ /*QUANDO COLOCA NEGATIVO, VAI PRA FORA DA TELA*/
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /*VOLTA PRA POSIÇÃO INICIAL*/
+  }
+
+}
+
+body {
+  background-color: #121215;
+  color: #EAEAEa; 
+  font-family: 'Roboto', sans-serif; /*FONTE DO GOOGLE FONTES*/
+  display: grid; /*OS ELEMENTOS QUE ESTIVEREM AQUI SERÃO DISPLAY GRID, DEFINIR O LAYOUT DE GRID PRA ELES, FICARÃO DUAS COLUNAS*/
+  grid-template-areas: "profile timeline"; /*AQUI SERA DEFINIDO OS NOMES PARA AS AREAS*/
+  grid-template-columns: 1fr 1fr; /*DEFINE O TAMANHO DE CADA COLUNA*/
+  grid-template-rows: 100vh; /*DEFINE A ALTURA DA VIEW = QUE É A REGIÃO DA TELA, DEIXANDO ELA FLEXÍVEL*/
+}
+
+nav {
+  padding: 64px;
+  grid-area: timeline; /*DEFINE A NAV COMO GRID TIMELINE*/
+  overflow-y: scroll; /*Y = VERTICAL, QUANDO O CONTEÚDO NÃO COUBER NA VERTICAL, PODE HABILITAL O SCROLL, PROFILE FICOU FIXO E APENAS A TIMELINE SCROLLA*/
+  animation: entering 0.7s ease-in-out; /*INSERINDO A ANIMAÇÃO NO NAV*/
+}
+
+.memory {
+  display: flex; /*DIZ QUE TODOS OS ELEMENTOS DESSA CLASSE DEVEM SER FLEXÍVEIS*/ /*TUDO FICA UM DO LADO DO OUTRO*/
+  flex-direction: column; /*DIZ PARA FICAR UM EM BAIXO DO OUTRO*/
+  gap: 16px; /*ESPAÇAMENTO ENTRE CADA UM DESSES ELEMENTOS*/
+
+  text-decoration: none; /*SERVE PARA TIRAR O UNDERLINE DO TEXTO*/
+  margin-bottom: 64px; /*SERVE PARA BOTAR UMA MARGEM NA PARTE DE BAIXO*/ 
+}
+
+.memory small { /*SERVE PARA TEXTOS PEQUENOS*/
+  color: #bebebf;
+  font-size: 0.75rem; /*REM-ESSA UNIDADE DE MEDIDA QUE VAI USAR O QUE FOI DEFINIDO NO ROOT COMO UMA REFERÊNCIA*/
+}
+
+.memory h1 {
+  font-size: 2rem;
+  color: #EAEAEa;
+}
+
+.memory img {
+  width: 100%; /*LARGURA DA IMAGEM*/
+  height: 280px; /*ALTURA DA IMAGEM*/
+  object-fit: cover; /*PROPRIEDADE USADA PRA ELA SEMPRE MANTER A PROPORÇÃO DE UMA CAPA*/
+  border-radius: 8px; /*ARREDONDAMENTO DAS BORDAS*/
+  transition: transform 0.3s ease-in-out; /*FAZ A IMAGEM AUMENTAR MAIS SUAVE, É UMA TRANSIÇÃO DE IMAGEM*/ /*EASE-IN-OUT = EFEITO NA HORA DE AUMENTAR A IMAGEM QUANDO PASSA O MOUSE EM CIMA*/ 
+}
+
+.memory:hover img{ /*AUMENTA APENAS A IMAGEM QUANDO O MOUSE PASSA EM CIMA*/
+  transform: scale(1.1); /*DEFINE A ESCALA DE 10% DO TAMANHO DO ELEMENTO*/ 
+
+}
+
+.memory div {
+  width: 100%; /*LARGURA DA DIV*/
+  height: 280px; /*ALTURA DA DIV*/
+  overflow: hidden; /*SERVE PARA QUANDO A IMAGEM PASSAR DO TAMANHO DO WIDTH E HEIGHT, ELE ESCONDE O RESTANTE DA IMAGEM*/
+  border-radius: 8px; /*ARREDONDAMENTO DAS BORDAS*/
+}
+
+.memory p {
+  font-size: 1.2rem;
+  color: #bebebf;
+  line-height: 28px; /*ESPAÇAMENTO DE UMA LINHA PARA OUTRA*/
+}
+
+aside {
+  grid-area: profile; /*DEFINE O ASIDE COMO GRID PROFILE*/
+  display: flex; /*ELEMENTOS DENTRO DO ASIDE SERÃO POSICIONADOS UTILIZANDO FLEXBOX*/
+  flex-direction: column; /*DEFINE A POSIÇÃO COMO COLUNA*/
+  align-items: center; /*CENTRALIZA OS ELEMENTOS NA HORIZONTAL*/
+  justify-content: center; /*CENTRALIZA NA VERTICAL*/
+  gap: 20px; /*ESPAÇAMENTOS ENTRE OS ELEMENTOS DO ASIDE*/
+  border-right: 1px solid; /*DEFINE UMA BORDA DO LADO DIREITO*/
+  border-image: linear-gradient(#727275, #2c2c31) 1/*1 = OPACIDADE DA BORDA*/; /*FAZ A BORDA FICAR GRADIENTE*/
+  background-image: url("./assets/background.svg"); /*FUNDO DO PERFIL*/
+  background-position: top right; /*POSICIONA O BACKGROUD-IMAGE DO LADO DA BORDA, USANDO COMO REFERÊNCIA PRA FAZER O ALINHAMENTO, O TOPO E O LADO DIREITO*/
+  background-repeat: no-repeat; /*IMPEDE QUE O BACKGROUD-IMAGE SE REPITA*/
+  background-size: auto 100%; /*FAZ COM QUE O BACKGROUD-IMAGE SE AJUSTE MELHOR NA TELA*/
+}
+
+aside * {
+  animation: entering 0.7s ease-in-out; /*INSERINDO A ANIMAÇÃO APENAS NA IMAGEM E TEXTOS DO ASIDE*/ /*->*<-O ASTERISCO SERVE PARA DIZER QUE TODOS OS ELEMENTOS QUE ESTÃO DENTRO DO ASIDE APLICAM A ANIMAÇÃO*/
+}
+
+aside img:nth-child(2) {
+  width: 160px; /*LARGURA DA IMAGEM*/
+  height: 160px; /*ALTURA DA IMAGEM*/
+  border-radius: 50%; /*DEIXA A IMAGEM REDONDA*/
+  border: 4px solid transparent; /*DEFINE A BORDA*/
+  background: linear-gradient(#d39e33, #ed5636, #633bbc) padding-box, /*DEFINE AS CORES DA BORDA*/
+  linear-gradient(260deg, #d39e33, #ed5636, #633bbc) border-box; /*260deg = DEFINI AS POSIÇÕES, COLOCAR O EFEITO NA BORDA*/
+}
+
+aside p {
+  font-size: 2rem; /*TAMANHO DA FONTE*/
+  text-align: center; /*CENTRALIZA O TEXTO*/
+}
+
+aside span {
+  font-size: 0.75rem; /*TAMANHO DA FONTE*/
+  color: #9e9ea0; /*COR DO TEXTO*/
+}
+
+/*QUANDO O SITE ESTIVER EM UMA TELA COM UMA LARGURA MÁXIMA DE 768PX, OU SEJA ATÉ 768PX, O QUE VAI PREVALECE É O QUE VAI ESTAR APLICADO AQUI DENTRO*/
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px;
+  }
+
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 0.8fr;
+    grid-template-areas: 
+    "profile"
+    "timeline";
+  }
+
+  /*RETIRA A BORDA DIREITA*/
+  aside {
+    border-right: none;
+    padding: 32px 12px; /*32PX EM CIMA E EM BAIXO E 12PX DOS LADOS*/
+  }
+
+  /*ONDE FOI DEFINIDA O SCROLL, PARA BOTAR EM TODA A TELA*/
+  nav {
+    overflow-y: visible; /*BOTA SCROLL PARA TODA A TELA*/
+    padding: 22px; /*DIMINUI O ESPAÇAMENTO NA LATERAL*/
+  }
+}
